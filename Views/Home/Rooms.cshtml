@@ -1,0 +1,33 @@
+@model List<Room>
+@{ ViewData["Title"] = "Rooms"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Hotel Rooms 🛏️</h1>
+        <p class="page-subtitle">Browse all available accommodations for your pets.</p>
+    </div>
+</div>
+
+<div class="rooms-display-grid">
+    @foreach (var r in Model)
+    {
+        <div class="room-display-card @(r.IsAvailable ? "" : "unavailable")">
+            <div class="room-display-header">
+                <span class="room-display-number">Room @r.RoomNumber</span>
+                <span class="room-availability @(r.IsAvailable ? "available" : "occupied")">
+                    @(r.IsAvailable ? "✓ Available" : "✗ Occupied")
+                </span>
+            </div>
+            <div class="room-display-type">@r.RoomType</div>
+            <div class="room-display-pet">Best for: @r.PetType</div>
+            <div class="room-display-desc">@r.Description</div>
+            <div class="room-display-price">
+                ₱@r.PricePerNight.ToString("N2") <span>/night</span>
+            </div>
+            @if (r.IsAvailable)
+            {
+                <a asp-controller="Booking" asp-action="Create" class="btn-primary room-book-btn">Book Now</a>
+            }
+        </div>
+    }
+</div>

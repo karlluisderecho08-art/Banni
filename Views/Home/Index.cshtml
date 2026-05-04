@@ -1,0 +1,87 @@
+@model HomeViewModel
+@{ ViewData["Title"] = "Dashboard"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Welcome to Banni! :></h1>
+        <p class="page-subtitle">Here's what's happening at the hotel today.</p>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card stat-blue">
+        <div class="stat-icon">🐾</div>
+        <div class="stat-info">
+            <div class="stat-value">@Model.TotalPets</div>
+            <div class="stat-label">Registered Pets</div>
+        </div>
+    </div>
+    <div class="stat-card stat-green">
+        <div class="stat-icon">🏠</div>
+        <div class="stat-info">
+            <div class="stat-value">@Model.ActiveGuests</div>
+            <div class="stat-label">Current Guests</div>
+        </div>
+    </div>
+    <div class="stat-card stat-amber">
+        <div class="stat-icon">📋</div>
+        <div class="stat-info">
+            <div class="stat-value">@Model.TotalBookings</div>
+            <div class="stat-label">Total Bookings</div>
+        </div>
+    </div>
+    <div class="stat-card stat-rose">
+        <div class="stat-icon">🛏️</div>
+        <div class="stat-info">
+            <div class="stat-value">@Model.AvailableRooms</div>
+            <div class="stat-label">Available Rooms</div>
+        </div>
+    </div>
+</div>
+
+<div class="section-header">
+    <h2 class="section-title">Recent Bookings</h2>
+    <a asp-controller="Booking" asp-action="Create" class="btn-primary">+ New Booking</a>
+</div>
+
+<div class="table-card">
+    @if (!Model.RecentBookings.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p>No bookings yet. <a asp-controller="Booking" asp-action="Create">Create the first one!</a></p>
+        </div>
+    }
+    else
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Pet</th>
+                    <th>Owner</th>
+                    <th>Room</th>
+                    <th>Check-In</th>
+                    <th>Check-Out</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model.RecentBookings)
+                {
+                    <tr>
+                        <td class="id-cell">#@b.Id</td>
+                        <td><strong>@b.PetName</strong></td>
+                        <td>@b.OwnerName</td>
+                        <td>@b.RoomNumber (@b.RoomType)</td>
+                        <td>@b.CheckInDate.ToString("MMM dd")</td>
+                        <td>@b.CheckOutDate.ToString("MMM dd")</td>
+                        <td><span class="badge badge-@b.Status.ToLower().Replace("-","")">@b.Status</span></td>
+                        <td class="price-cell">₱@b.TotalPrice.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,79 @@
+@model RegisterViewModel
+@{ ViewData["Title"] = "Register New Pet"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Register a New Guest 🐶</h1>
+        <p class="page-subtitle">Add a new owner and their furry companion to our system.</p>
+    </div>
+</div>
+
+<div class="form-layout">
+    <form asp-action="Register" method="post">
+        <div class="form-section">
+            <h3 class="form-section-title">👤 Owner Information</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input asp-for="Owner.FullName" placeholder="e.g. Maria Santos" required />
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input asp-for="Owner.Email" type="email" placeholder="maria@email.com" required />
+                </div>
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input asp-for="Owner.Phone" placeholder="+63 9XX XXX XXXX" required />
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input asp-for="Owner.Address" placeholder="Street, City" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">🐾 Pet Information</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Pet Name *</label>
+                    <input asp-for="Pet.Name" placeholder="e.g. Buddy" required />
+                </div>
+                <div class="form-group">
+                    <label>Species *</label>
+                    <select asp-for="Pet.Species" required>
+                        <option value="">Select species...</option>
+                        <option value="Dog">🐕 Dog</option>
+                        <option value="Cat">🐈 Cat</option>
+                        <option value="Bird">🐦 Bird</option>
+                        <option value="Rabbit">🐇 Rabbit</option>
+                        <option value="Hamster">🐹 Hamster</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Breed</label>
+                    <input asp-for="Pet.Breed" placeholder="e.g. Golden Retriever" />
+                </div>
+                <div class="form-group">
+                    <label>Age (years)</label>
+                    <input asp-for="Pet.Age" type="number" min="0" max="30" placeholder="3" />
+                </div>
+                <div class="form-group">
+                    <label>Weight (kg)</label>
+                    <input asp-for="Pet.Weight" type="number" step="0.1" min="0" placeholder="5.5" />
+                </div>
+                <div class="form-group form-group-full">
+                    <label>Special Notes / Medical Info</label>
+                    <textarea asp-for="Pet.SpecialNotes" rows="3"
+                              placeholder="Any allergies, medications, or special needs..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn-secondary">Cancel</a>
+            <button type="submit" class="btn-primary">Register Guest 🐾</button>
+        </div>
+    </form>
+</div>

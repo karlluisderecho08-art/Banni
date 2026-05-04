@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\PetHotel\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\PetHotel\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.PetHotel.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.build.PetHotel.props",
+      "PackagePath": "build\\PetHotel.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildMultiTargeting.PetHotel.props",
+      "PackagePath": "buildMultiTargeting\\PetHotel.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildTransitive.PetHotel.props",
+      "PackagePath": "buildTransitive\\PetHotel.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

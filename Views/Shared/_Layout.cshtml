@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — PawsInn Pet Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <span class="logo-paw">🐾</span>
+            <span class="logo-text">Banni</span>
+        </a>
+        <ul class="nav-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Register">Register Pet</a></li>
+            <li><a asp-controller="Home" asp-action="Owners">Owners</a></li>
+            <li><a asp-controller="Home" asp-action="Pets">Pets</a></li>
+            <li><a asp-controller="Home" asp-action="Rooms">Rooms</a></li>
+            <li><a asp-controller="Booking" asp-action="Index">Bookings</a></li>
+            <li><a asp-controller="Booking" asp-action="Create" class="btn-nav">+ New Booking</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                <span>✓</span> @TempData["Success"]
+            </div>
+        }
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 PawsInn Pet Hotel · Made with 🐾 for your furry friends</p>
+    </footer>
+
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "9y9DgpMUkbvKn3hHNX5AMBV1VM6R9uMrPzYQtiIIP30=",
+  "Source": "PetHotel",
+  "BasePath": "_content/PetHotel",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "PetHotel\\wwwroot",
+      "Source": "PetHotel",
+      "ContentRoot": "C:\\PetHotel\\wwwroot\\",
+      "BasePath": "_content/PetHotel",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\PetHotel\\wwwroot\\css\\site.css",
+      "SourceId": "PetHotel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\PetHotel\\wwwroot\\",
+      "BasePath": "_content/PetHotel",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\PetHotel\\wwwroot\\js\\site.js",
+      "SourceId": "PetHotel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\PetHotel\\wwwroot\\",
+      "BasePath": "_content/PetHotel",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ]
+}
