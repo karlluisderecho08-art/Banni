@@ -4,15 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] — PawsInn Pet Hotel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
     <nav class="navbar">
         <a href="/" class="logo">
-            <span class="logo-paw">🐾</span>
-            <span class="logo-text">Banni</span>
+            <img src="/images/Logo.png" alt="Banni Logo" class="logo-img" />
         </a>
         <ul class="nav-links">
             <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>

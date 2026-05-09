@@ -5,6 +5,9 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root {
+  *, body, input, select, textarea, button {
+    font-family: 'Poppins', sans-serif !important;
+  }
   --cream: #f5f2eb;
   --cream-dark: #ebe5d8;
   --green: #3D5212;
@@ -28,12 +31,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--text-dark);
-  font-size: 15px;
-  line-height: 1.6;
-  min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                      url('/images/Background.png');
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────── */
@@ -52,11 +57,13 @@ body {
   display: flex; align-items: center; gap: 0.5rem;
   text-decoration: none; flex-shrink: 0;
 }
-.logo-paw { font-size: 1.5rem; }
-.logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem; font-weight: 700;
-  color: var(--white); letter-spacing: 0.5px;
+
+.logo-img {
+    height: 63px;
+    width: auto;
+    object-fit: contain;
+    filter: invert(1);
+    mix-blend-mode: screen;
 }
 
 .nav-links {

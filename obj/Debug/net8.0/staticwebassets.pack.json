@@ -1,11 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\PetHotel\\wwwroot\\css\\site.css",
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\PetHotel\\wwwroot\\js\\site.js",
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Background.png",
+      "PackagePath": "staticwebassets\\images\\Background.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Logo.png",
+      "PackagePath": "staticwebassets\\images\\Logo.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
