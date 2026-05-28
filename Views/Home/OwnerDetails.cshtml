@@ -4,9 +4,9 @@
 <div class="page-header">
     <div>
         <h1 class="page-title">@Model.FullName</h1>
-        <p class="page-subtitle">Owner profile and registered pets.</p>
+        <p class="page-subtitle">Owner profile and registered pets</p>
     </div>
-    <a asp-action="Owners" class="btn-secondary">← Back to Owners</a>
+    <a asp-action="Owners" class="btn-secondary">&larr; Back to Owners</a>
 </div>
 
 <div class="detail-grid">
@@ -23,29 +23,41 @@
     <h2 class="section-title">Pets (@Model.Pets.Count)</h2>
 </div>
 
-<div class="pets-grid">
-    @foreach (var p in Model.Pets)
-    {
-        <div class="pet-card">
-            <div class="pet-emoji">
-                @(p.Species switch {
-                    "Dog" => "🐕",
-                    "Cat" => "🐈",
-                    "Bird" => "🐦",
-                    "Rabbit" => "🐇",
-                    _ => "🐾"
-                })
-            </div>
-            <div class="pet-name">@p.Name</div>
-            <div class="pet-meta">@p.Species · @(p.Breed ?? "Mixed")</div>
-            @if (p.Age.HasValue)
-            {
-                <div class="pet-meta">Age: @p.Age yrs</div>
-            }
-            @if (!string.IsNullOrEmpty(p.SpecialNotes))
-            {
-                <div class="pet-notes">📝 @p.SpecialNotes</div>
-            }
+@if (Model.Pets.Count == 0)
+{
+    <div class="table-card">
+        <div class="empty-state">
+            <div class="empty-icon">&#128062;</div>
+            <p>No pets registered for this owner yet.</p>
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="pets-grid">
+        @foreach (var p in Model.Pets)
+        {
+            <div class="pet-card">
+                <div class="pet-emoji">
+                    @(p.Species switch {
+                        "Dog" => "&#128021;",
+                        "Cat" => "&#128008;",
+                        "Bird" => "&#128038;",
+                        "Rabbit" => "&#128007;",
+                        _ => "&#128062;"
+                    })
+                </div>
+                <div class="pet-name">@p.Name</div>
+                <div class="pet-meta">@p.Species &middot; @(p.Breed ?? "Mixed")</div>
+                @if (p.Age.HasValue)
+                {
+                    <div class="pet-meta">Age: @p.Age yrs</div>
+                }
+                @if (!string.IsNullOrEmpty(p.SpecialNotes))
+                {
+                    <div class="pet-notes">@p.SpecialNotes</div>
+                }
+            </div>
+        }
+    </div>
+}

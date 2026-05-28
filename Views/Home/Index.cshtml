@@ -3,35 +3,35 @@
 
 <div class="page-header">
     <div>
-        <h1 class="page-title">Welcome to Banni!</h1>
-        <p class="page-subtitle">Here's what's happening at the hotel today.</p>
+        <h1 class="page-title">Welcome to Banni</h1>
+        <p class="page-subtitle">Here&apos;s what&apos;s happening at the hotel today</p>
     </div>
 </div>
 
 <div class="stats-grid">
     <div class="stat-card stat-blue">
-        <div class="stat-icon">🐾</div>
+        <div class="stat-icon">&#128062;</div>
         <div class="stat-info">
             <div class="stat-value">@Model.TotalPets</div>
             <div class="stat-label">Registered Pets</div>
         </div>
     </div>
     <div class="stat-card stat-green">
-        <div class="stat-icon">🏠</div>
+        <div class="stat-icon">&#127968;</div>
         <div class="stat-info">
             <div class="stat-value">@Model.ActiveGuests</div>
             <div class="stat-label">Current Guests</div>
         </div>
     </div>
     <div class="stat-card stat-amber">
-        <div class="stat-icon">📋</div>
+        <div class="stat-icon">&#128203;</div>
         <div class="stat-info">
             <div class="stat-value">@Model.TotalBookings</div>
             <div class="stat-label">Total Bookings</div>
         </div>
     </div>
     <div class="stat-card stat-rose">
-        <div class="stat-icon">🛏️</div>
+        <div class="stat-icon">&#128719;</div>
         <div class="stat-info">
             <div class="stat-value">@Model.AvailableRooms</div>
             <div class="stat-label">Available Rooms</div>
@@ -48,7 +48,7 @@
     @if (!Model.RecentBookings.Any())
     {
         <div class="empty-state">
-            <div class="empty-icon">📭</div>
+            <div class="empty-icon">&#128237;</div>
             <p>No bookings yet. <a asp-controller="Booking" asp-action="Create">Create the first one!</a></p>
         </div>
     }
@@ -80,7 +80,7 @@
                         <td>@b.CheckInDate.ToString("MMM dd")</td>
                         <td>@b.CheckOutDate.ToString("MMM dd")</td>
                         <td><span class="badge badge-@b.Status.ToLower().Replace("-","")">@b.Status</span></td>
-                        <td class="price-cell">₱@b.TotalPrice.ToString("N2")</td>
+                        <td class="price-cell">&#8369;@b.TotalPrice.ToString("N2")</td>
                     </tr>
                 }
             </tbody>

@@ -3,15 +3,15 @@
 
 <div class="page-header">
     <div>
-        <h1 class="page-title">Register a New Guest 🐶</h1>
-        <p class="page-subtitle">Add a new owner and their furry companion to our system.</p>
+        <h1 class="page-title">Register a New Guest</h1>
+        <p class="page-subtitle">Add a new owner and their furry companion to our system</p>
     </div>
 </div>
 
 <div class="form-layout">
     <form asp-action="Register" method="post">
         <div class="form-section">
-            <h3 class="form-section-title">👤 Owner Information</h3>
+            <h3 class="form-section-title">Owner Information</h3>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Full Name *</label>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-section">
-            <h3 class="form-section-title">🐾 Pet Information</h3>
+            <h3 class="form-section-title">Pet Information</h3>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Pet Name *</label>
@@ -43,11 +43,11 @@
                     <label>Species *</label>
                     <select asp-for="Pet.Species" required>
                         <option value="">Select species...</option>
-                        <option value="Dog">🐕 Dog</option>
-                        <option value="Cat">🐈 Cat</option>
-                        <option value="Bird">🐦 Bird</option>
-                        <option value="Rabbit">🐇 Rabbit</option>
-                        <option value="Hamster">🐹 Hamster</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Hamster">Hamster</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
@@ -73,7 +73,7 @@
 
         <div class="form-actions">
             <a asp-action="Index" class="btn-secondary">Cancel</a>
-            <button type="submit" class="btn-primary">Register Guest 🐾</button>
+            <button type="submit" class="btn-primary">Register Guest</button>
         </div>
     </form>
 </div>

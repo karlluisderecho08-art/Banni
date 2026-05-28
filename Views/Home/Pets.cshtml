@@ -3,40 +3,45 @@
 
 <div class="page-header">
     <div>
-        <h1 class="page-title">All Pets 🐾</h1>
-        <p class="page-subtitle">Every furry, feathered, and fuzzy guest in our system.</p>
+        <h1 class="page-title">All Pets</h1>
+        <p class="page-subtitle">Every furry, feathered, and fuzzy guest in our system</p>
     </div>
     <a asp-action="Register" class="btn-primary">+ Register Pet</a>
 </div>
 
-<div class="pets-grid">
-    @if (!Model.Any())
-    {
+@if (!Model.Any())
+{
+    <div class="table-card">
         <div class="empty-state">
-            <div class="empty-icon">🐾</div>
-            <p>No pets registered yet.</p>
+            <div class="empty-icon">&#128062;</div>
+            <p>No pets registered yet. <a asp-action="Register">Register the first one!</a></p>
         </div>
-    }
-    @foreach (var p in Model)
-    {
-        <div class="pet-card">
-            <div class="pet-emoji">
-                @(p.Species switch {
-                    "Dog" => "🐕",
-                    "Cat" => "🐈",
-                    "Bird" => "🐦",
-                    "Rabbit" => "🐇",
-                    "Hamster" => "🐹",
-                    _ => "🐾"
-                })
+    </div>
+}
+else
+{
+    <div class="pets-grid">
+        @foreach (var p in Model)
+        {
+            <div class="pet-card">
+                <div class="pet-emoji">
+                    @(p.Species switch {
+                        "Dog" => "&#128021;",
+                        "Cat" => "&#128008;",
+                        "Bird" => "&#128038;",
+                        "Rabbit" => "&#128007;",
+                        "Hamster" => "&#128057;",
+                        _ => "&#128062;"
+                    })
+                </div>
+                <div class="pet-name">@p.Name</div>
+                <div class="pet-meta">@p.Species &middot; @(p.Breed ?? "Mixed")</div>
+                <div class="pet-owner">Owner: @(p.Owner?.FullName ?? "—")</div>
+                @if (p.Age.HasValue)
+                {
+                    <div class="pet-meta">Age: @p.Age yrs &middot; @p.Weight kg</div>
+                }
             </div>
-            <div class="pet-name">@p.Name</div>
-            <div class="pet-meta">@p.Species · @(p.Breed ?? "Mixed")</div>
-            <div class="pet-owner">Owner: @(p.Owner?.FullName ?? "—")</div>
-            @if (p.Age.HasValue)
-            {
-                <div class="pet-meta">Age: @p.Age yrs · @p.Weight kg</div>
-            }
-        </div>
-    }
-</div>
+        }
+    </div>
+}

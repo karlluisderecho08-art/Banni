@@ -3,8 +3,8 @@
 
 <div class="page-header">
     <div>
-        <h1 class="page-title">New Reservation 🏨</h1>
-        <p class="page-subtitle">Book a comfortable stay for your furry friend.</p>
+        <h1 class="page-title">New Reservation</h1>
+        <p class="page-subtitle">Book a comfortable stay for your furry friend</p>
     </div>
 </div>
 
@@ -18,7 +18,7 @@
 <div class="form-layout">
     <form asp-action="Create" method="post">
         <div class="form-section">
-            <h3 class="form-section-title">🐾 Select Pet</h3>
+            <h3 class="form-section-title">Select Pet</h3>
             <div class="form-group">
                 <label>Pet *</label>
                 <select asp-for="Booking.PetId" required>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-section">
-            <h3 class="form-section-title">📅 Stay Dates</h3>
+            <h3 class="form-section-title">Stay Dates</h3>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Check-In Date *</label>
@@ -45,16 +45,16 @@
                            min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" required />
                 </div>
             </div>
-            <button type="button" id="findRoomsBtn" class="btn-secondary">🔍 Find Available Rooms</button>
+            <button type="button" id="findRoomsBtn" class="btn-secondary" style="margin-top: 1rem;">Find Available Rooms</button>
         </div>
 
         <div class="form-section" id="roomsSection" style="display:none">
-            <h3 class="form-section-title">🛏️ Available Rooms</h3>
+            <h3 class="form-section-title">Available Rooms</h3>
             <div id="roomsList" class="rooms-grid"></div>
         </div>
 
         <div class="form-section">
-            <h3 class="form-section-title">✨ Add-on Services</h3>
+            <h3 class="form-section-title">Add-on Services</h3>
             <div class="services-grid">
                 @foreach (var s in Model.Services)
                 {
@@ -63,7 +63,7 @@
                         <div class="service-info">
                             <div class="service-name">@s.Name</div>
                             <div class="service-desc">@s.Description</div>
-                            <div class="service-price">₱@s.Price.ToString("N2")</div>
+                            <div class="service-price">&#8369;@s.Price.ToString("N2")</div>
                         </div>
                     </label>
                 }
@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-section">
-            <h3 class="form-section-title">📝 Special Requests</h3>
+            <h3 class="form-section-title">Special Requests</h3>
             <div class="form-group">
                 <textarea asp-for="Booking.SpecialRequests" rows="3"
                           placeholder="Any special care instructions or preferences..."></textarea>
@@ -80,25 +80,24 @@
 
         <div class="price-summary" id="priceSummary" style="display:none">
             <div class="price-row">
-                <span>Room (<span id="nightCount">0</span> nights × ₱<span id="roomRate">0</span>)</span>
-                <span>₱<span id="roomTotal">0.00</span></span>
+                <span>Room (<span id="nightCount">0</span> nights &times; &#8369;<span id="roomRate">0</span>)</span>
+                <span>&#8369;<span id="roomTotal">0.00</span></span>
             </div>
             <div class="price-row">
                 <span>Add-on Services</span>
-                <span>₱<span id="servicesTotal">0.00</span></span>
+                <span>&#8369;<span id="servicesTotal">0.00</span></span>
             </div>
             <div class="price-row price-total">
                 <span>Total</span>
-                <span>₱<span id="grandTotal">0.00</span></span>
+                <span>&#8369;<span id="grandTotal">0.00</span></span>
             </div>
         </div>
 
-        <!-- Hidden input moved outside any hidden container so it always submits -->
         <input type="hidden" asp-for="Booking.RoomId" id="selectedRoomId" />
 
         <div class="form-actions">
             <a asp-action="Index" class="btn-secondary">Cancel</a>
-            <button type="submit" class="btn-primary">Confirm Booking 🐾</button>
+            <button type="submit" class="btn-primary">Confirm Booking</button>
         </div>
     </form>
 </div>
