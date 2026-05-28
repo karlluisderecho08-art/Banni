@@ -9,8 +9,52 @@
       "PackagePath": "staticwebassets\\images\\Background.png"
     },
     {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Bird.png",
+      "PackagePath": "staticwebassets\\images\\Bird.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Booking.png",
+      "PackagePath": "staticwebassets\\images\\Booking.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Cat.png",
+      "PackagePath": "staticwebassets\\images\\Cat.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Dog.png",
+      "PackagePath": "staticwebassets\\images\\Dog.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Guest.png",
+      "PackagePath": "staticwebassets\\images\\Guest.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Hamster.png",
+      "PackagePath": "staticwebassets\\images\\Hamster.png"
+    },
+    {
       "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Logo.png",
       "PackagePath": "staticwebassets\\images\\Logo.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Others.png",
+      "PackagePath": "staticwebassets\\images\\Others.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Owner.png",
+      "PackagePath": "staticwebassets\\images\\Owner.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Rabbit.png",
+      "PackagePath": "staticwebassets\\images\\Rabbit.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\RegPet.png",
+      "PackagePath": "staticwebassets\\images\\RegPet.png"
+    },
+    {
+      "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\images\\Room.png",
+      "PackagePath": "staticwebassets\\images\\Room.png"
     },
     {
       "Id": "D:\\KARL\\PUP\\Banni\\wwwroot\\js\\site.js",

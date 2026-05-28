@@ -63,8 +63,8 @@ public class DatabaseService
     {
         using var conn = GetConnection();
         return await conn.ExecuteScalarAsync<int>(@"
-            INSERT INTO Owners (FullName, Email, Phone, Address)
-            VALUES (@FullName, @Email, @Phone, @Address);
+            INSERT INTO Owners (FullName, Email, Phone, Address, CreatedAt)
+            VALUES (@FullName, @Email, @Phone, @Address, @CreatedAt);
             SELECT LAST_INSERT_ID();", owner);
     }
 

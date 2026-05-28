@@ -21,9 +21,13 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel vm)
     {
+        vm.Owner.CreatedAt = DateTime.Now;
+        vm.Pet.CreatedAt = DateTime.Now;
+
         var ownerId = await _db.CreateOwnerAsync(vm.Owner);
         vm.Pet.OwnerId = ownerId;
         await _db.CreatePetAsync(vm.Pet);
+        
         TempData["Success"] = $"Welcome! {vm.Owner.FullName} and {vm.Pet.Name} are now registered.";
         return RedirectToAction("Index");
     }

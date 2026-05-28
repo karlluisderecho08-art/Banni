@@ -4,34 +4,42 @@
 <div class="page-header">
     <div>
         <h1 class="page-title">Welcome to Banni!</h1>
-        <p class="page-subtitle">Here's what's happening at the hotel today.</p>
+        <p class="page-subtitle">While You’re Away, Let Them Play</p>
     </div>
 </div>
 
 <div class="stats-grid">
     <div class="stat-card stat-blue">
-        <div class="stat-icon">🐾</div>
+        <div class="stat-icon">
+            <img src="~/images/RegPet.png" alt="Registered Pets" style="width: 120px; height: auto;" />
+        </div>
         <div class="stat-info">
             <div class="stat-value">@Model.TotalPets</div>
             <div class="stat-label">Registered Pets</div>
         </div>
     </div>
     <div class="stat-card stat-green">
-        <div class="stat-icon">🏠</div>
+        <div class="stat-icon">
+            <img src="~/images/Guest.png" alt="Current Guests" style="width: 120px; height: auto;" />
+        </div>
         <div class="stat-info">
             <div class="stat-value">@Model.ActiveGuests</div>
             <div class="stat-label">Current Guests</div>
         </div>
     </div>
     <div class="stat-card stat-amber">
-        <div class="stat-icon">📋</div>
+        <div class="stat-icon">
+            <img src="~/images/Booking.png" alt="Total Bookings" style="width: 120px; height: auto;" />
+        </div>
         <div class="stat-info">
             <div class="stat-value">@Model.TotalBookings</div>
             <div class="stat-label">Total Bookings</div>
         </div>
     </div>
     <div class="stat-card stat-rose">
-        <div class="stat-icon">🛏️</div>
+        <div class="stat-icon">
+            <img src="~/images/Room.png" alt="Available Rooms" style="width: 120px; height: auto;" />
+        </div>
         <div class="stat-info">
             <div class="stat-value">@Model.AvailableRooms</div>
             <div class="stat-label">Available Rooms</div>
