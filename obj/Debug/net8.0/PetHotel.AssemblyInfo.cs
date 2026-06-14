@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PetHotel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30c5a2afe205b84ce27721e88ba16553738e43a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("PetHotel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PetHotel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

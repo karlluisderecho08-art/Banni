@@ -5,7 +5,7 @@
     <div>
         <h1 class="page-title">
             Pet Owners 
-            <img src="~/images/Owner.png" alt="Owner Icon" style="width: 120px; height: auto; vertical-align: text-bottom; margin-left: 5px; mix-blend-mode: multiply;" />
+            <img src="~/images/Owner.png" alt="Owner Icon" style="width: 120px; height: auto; vertical-align: text-bottom; mix-blend-mode: multiply;" />
         </h1>
         <p class="page-subtitle">All registered pet owners in our system.</p>
     </div>
@@ -43,7 +43,10 @@
                         <td>@o.Phone</td>
                         <td>@o.CreatedAt.ToString("MMM dd, yyyy")</td>
                         <td>
-                            <a asp-action="OwnerDetails" asp-route-id="@o.Id" class="btn-xs btn-blue">View Pets</a>
+                            <div class="action-buttons">
+                                <a asp-action="OwnerDetails" asp-route-id="@o.Id" class="btn-xs btn-blue">View Pets</a>
+                                <a asp-action="AddPet" asp-route-ownerId="@o.Id" class="btn-xs btn-green">+ Add Pet</a>
+                            </div>
                         </td>
                     </tr>
                 }

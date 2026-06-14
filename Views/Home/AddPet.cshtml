@@ -1,0 +1,62 @@
+@model Pet
+@{ ViewData["Title"] = "Add Pet"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            Add a New Pet
+            <img src="~/images/RegPet.png" alt="Regpet Icon" style="width: 120px; height: auto; vertical-align: text-bottom; margin-left: 5px; mix-blend-mode: multiply;" />
+        </h1>
+        <p class="page-subtitle">Registering a new furry companion for <strong>@ViewBag.OwnerName</strong>.</p>
+    </div>
+</div>
+
+<div class="form-layout">
+    <form asp-action="AddPet" method="post">
+        <input type="hidden" asp-for="OwnerId" />
+
+        <div class="form-section">
+            <h3 class="form-section-title">Pet Information</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Pet Name *</label>
+                    <input asp-for="Name" placeholder="e.g. Buddy" required />
+                </div>
+                <div class="form-group">
+                    <label>Species *</label>
+                    <select asp-for="Species" required>
+                        <option value="">Select species...</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Hamster">Hamster</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Breed</label>
+                    <input asp-for="Breed" placeholder="e.g. Golden Retriever" />
+                </div>
+                <div class="form-group">
+                    <label>Age (years)</label>
+                    <input asp-for="Age" type="number" min="0" max="30" placeholder="3" />
+                </div>
+                <div class="form-group">
+                    <label>Weight (kg)</label>
+                    <input asp-for="Weight" type="number" step="0.1" min="0" placeholder="5.5" />
+                </div>
+                <div class="form-group form-group-full">
+                    <label>Special Notes / Medical Info</label>
+                    <textarea asp-for="SpecialNotes" rows="3"
+                              placeholder="Any allergies, medications, or special needs..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-action="Owners" class="btn-secondary">Cancel</a>
+            <button type="submit" class="btn-primary">Add Pet</button>
+        </div>
+    </form>
+</div>

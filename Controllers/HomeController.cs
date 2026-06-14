@@ -56,4 +56,36 @@ public class HomeController : Controller
         var rooms = await _db.GetAllRoomsAsync();
         return View(rooms);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> AddPet(int ownerId)
+    {
+        var owner = await _db.GetOwnerByIdAsync(ownerId);
+        if (owner == null) return NotFound();
+
+        var pet = new Pet { OwnerId = ownerId };
+        ViewBag.OwnerName = owner.FullName; 
+        
+        return View(pet);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddPet(Pet pet)
+    {
+        pet.CreatedAt = DateTime.Now;
+        await _db.CreatePetAsync(pet);
+
+        var owner = await _db.GetOwnerByIdAsync(pet.OwnerId);
+        TempData["Success"] = $"{pet.Name} has been added to {owner?.FullName ?? "the owner"}'s profile!";
+        
+        return RedirectToAction("Owners");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemovePet(int id, int ownerId)
+    {
+        await _db.DeletePetAsync(id);
+        TempData["Success"] = "The pet has been successfully removed.";
+        return RedirectToAction("OwnerDetails", new { id = ownerId });
+    }
 }

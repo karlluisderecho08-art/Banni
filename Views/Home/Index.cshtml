@@ -56,7 +56,6 @@
     @if (!Model.RecentBookings.Any())
     {
         <div class="empty-state">
-            <div class="empty-icon">📭</div>
             <p>No bookings yet. <a asp-controller="Booking" asp-action="Create">Create the first one!</a></p>
         </div>
     }

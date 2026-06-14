@@ -124,6 +124,21 @@ public class DatabaseService
             JOIN Rooms r ON b.RoomId = r.Id
             ORDER BY b.CreatedAt DESC")).ToList();
     }
+    public async Task DeletePetAsync(int id)
+    {
+        using var conn = GetConnection();
+        
+        var bookingIds = (await conn.QueryAsync<int>("SELECT Id FROM Bookings WHERE PetId = @Id", new { Id = id })).ToList();
+        
+        if (bookingIds.Any())
+        {
+            await conn.ExecuteAsync($"DELETE FROM BookingServices WHERE BookingId IN ({string.Join(",", bookingIds)})");
+            
+            await conn.ExecuteAsync("DELETE FROM Bookings WHERE PetId = @Id", new { Id = id });
+        }
+
+        await conn.ExecuteAsync("DELETE FROM Pets WHERE Id = @Id", new { Id = id });
+    }
 
     public async Task<int> CreateBookingAsync(Booking booking, List<int> serviceIds)
     {

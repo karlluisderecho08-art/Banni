@@ -386,3 +386,4 @@ C:\PUP Files\C#\Banni-laptop\obj\Debug\net8.0\refint\PetHotel.dll
 C:\PUP Files\C#\Banni-laptop\obj\Debug\net8.0\PetHotel.pdb
 C:\PUP Files\C#\Banni-laptop\obj\Debug\net8.0\PetHotel.genruntimeconfig.cache
 C:\PUP Files\C#\Banni-laptop\obj\Debug\net8.0\ref\PetHotel.dll
+C:\PUP Files\C#\Banni-laptop\obj\Debug\net8.0\PetHotel.sourcelink.json

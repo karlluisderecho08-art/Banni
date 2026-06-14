@@ -6,7 +6,7 @@
         <h1 class="page-title">@Model.FullName</h1>
         <p class="page-subtitle">Owner profile and registered pets.</p>
     </div>
-    <a asp-action="Owners" class="btn-secondary">← Back to Owners</a>
+    <a asp-action="Owners" class="btn-secondary">Back to Owners</a>
 </div>
 
 <div class="detail-grid">
@@ -27,25 +27,38 @@
     @foreach (var p in Model.Pets)
     {
         <div class="pet-card">
-            <div class="pet-emoji">
-                @(p.Species switch {
-                    "Dog" => "🐕",
-                    "Cat" => "🐈",
-                    "Bird" => "🐦",
-                    "Rabbit" => "🐇",
-                    _ => "🐾"
-                })
+            <div class="pet-image">
+                <img src="@(p.Species switch {
+                    "Dog" => "/images/Dog.png",
+                    "Cat" => "/images/Cat.png",
+                    "Bird" => "/images/Bird.png",
+                    "Rabbit" => "/images/Rabbit.png",
+                    "Hamster" => "/images/Hamster.png",
+                    _ => "/images/Others.png"
+                })" alt="@p.Species" style="width: 64px; height: 64px; object-fit: contain;" />
             </div>
             <div class="pet-name">@p.Name</div>
             <div class="pet-meta">@p.Species · @(p.Breed ?? "Mixed")</div>
+            
             @if (p.Age.HasValue)
             {
                 <div class="pet-meta">Age: @p.Age yrs</div>
             }
+            
             @if (!string.IsNullOrEmpty(p.SpecialNotes))
             {
                 <div class="pet-notes">@p.SpecialNotes</div>
             }
+
+            <div class="pet-actions" style="margin-top: 15px; text-align: center;">
+                <form asp-controller="Home" asp-action="RemovePet" method="post" onsubmit="return confirm('Are you sure you want to remove @p.Name? This cannot be undone.');">
+                    <input type="hidden" name="id" value="@p.Id" />
+                    <input type="hidden" name="ownerId" value="@Model.Id" />
+                    
+                    <button type="submit" class="btn-xs btn-red">Remove Pet</button>
+                </form>
+                
+            </div>
         </div>
     }
 </div>
