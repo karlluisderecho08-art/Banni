@@ -77,10 +77,11 @@ body {
 }
 
 .logo-img {
-    height: 50px;
+    height: 63px;
     width: auto;
-    display: block;
     object-fit: contain;
+    filter: grayscale(100%) contrast(500%) invert(100%);
+    mix-blend-mode: screen;
 }
 
 /* Navigation */
@@ -112,13 +113,14 @@ body {
 }
 
 .btn-nav {
-    background: var(--gold) !important;
-    color: white !important;
-    margin-left: auto;
+  background: #5a8c3a !important; 
+  color: white !important; 
+  margin-left: auto;
+  padding: 0.45rem 1.1rem !important;
 }
 
-.btn-nav:hover {
-    background: #69630b !important;
+.btn-nav:hover { 
+  background: #46732a !important; 
 }
 
 /* Main Content */
