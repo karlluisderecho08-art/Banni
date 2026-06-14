@@ -1,0 +1,182 @@
+@model BookingViewModel
+@{ ViewData["Title"] = "New Booking"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">New Reservation</h1>
+        <p class="page-subtitle">Book a comfortable stay for your furry friend.</p>
+    </div>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert-error">
+        @Html.ValidationSummary()
+    </div>
+}
+
+<div class="form-layout">
+    <form asp-action="Create" method="post">
+        <div class="form-section">
+            <h3 class="form-section-title">Select Pet</h3>
+            <div class="form-group">
+                <label>Pet *</label>
+                <select asp-for="Booking.PetId" required>
+                    <option value="">Choose a pet...</option>
+                    @foreach (var pet in Model.Pets)
+                    {
+                        <option value="@pet.Id">@pet.Name (@pet.Species) — @pet.Breed</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Stay Dates</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Check-In Date *</label>
+                    <input asp-for="Booking.CheckInDate" type="date" id="checkIn"
+                           min="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                </div>
+                <div class="form-group">
+                    <label>Check-Out Date *</label>
+                    <input asp-for="Booking.CheckOutDate" type="date" id="checkOut"
+                           min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" required />
+                </div>
+            </div>
+            <button type="button" id="findRoomsBtn" class="btn-secondary">Find Available Rooms</button>
+        </div>
+
+        <div class="form-section" id="roomsSection" style="display:none">
+            <h3 class="form-section-title">Available Rooms</h3>
+            <div id="roomsList" class="rooms-grid"></div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Add-on Services</h3>
+            <div class="services-grid">
+                @foreach (var s in Model.Services)
+                {
+                    <label class="service-card">
+                        <input type="checkbox" name="selectedServiceIds" value="@s.Id" />
+                        <div class="service-info">
+                            <div class="service-name">@s.Name</div>
+                            <div class="service-desc">@s.Description</div>
+                            <div class="service-price">₱@s.Price.ToString("N2")</div>
+                        </div>
+                    </label>
+                }
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">Special Requests</h3>
+            <div class="form-group">
+                <textarea asp-for="Booking.SpecialRequests" rows="3"
+                          placeholder="Any special care instructions or preferences..."></textarea>
+            </div>
+        </div>
+
+        <div class="price-summary" id="priceSummary" style="display:none">
+            <div class="price-row">
+                <span>Room (<span id="nightCount">0</span> nights × ₱<span id="roomRate">0</span>)</span>
+                <span>₱<span id="roomTotal">0.00</span></span>
+            </div>
+            <div class="price-row">
+                <span>Add-on Services</span>
+                <span>₱<span id="servicesTotal">0.00</span></span>
+            </div>
+            <div class="price-row price-total">
+                <span>Total</span>
+                <span>₱<span id="grandTotal">0.00</span></span>
+            </div>
+        </div>
+
+        <!-- Hidden input moved outside any hidden container so it always submits -->
+        <input type="hidden" asp-for="Booking.RoomId" id="selectedRoomId" />
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn-secondary">Cancel</a>
+            <button type="submit" class="btn-primary">Confirm Booking</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+<script>
+let selectedRoom = null;
+
+document.getElementById('findRoomsBtn').addEventListener('click', async () => {
+    const checkIn = document.getElementById('checkIn').value;
+    const checkOut = document.getElementById('checkOut').value;
+    if (!checkIn || !checkOut || checkIn >= checkOut) {
+        alert('Please select valid check-in and check-out dates.');
+        return;
+    }
+    const res = await fetch(`/Booking/GetAvailableRooms?checkIn=${checkIn}&checkOut=${checkOut}`);
+    const rooms = await res.json();
+    const list = document.getElementById('roomsList');
+    list.innerHTML = '';
+    if (rooms.length === 0) {
+        list.innerHTML = '<p class="no-rooms">No rooms available for these dates.</p>';
+    } else {
+        rooms.forEach(r => {
+            const card = document.createElement('div');
+            card.className = 'room-card';
+            card.dataset.id = r.id;
+            card.dataset.price = r.pricePerNight;
+            card.innerHTML = `
+                <div class="room-number">${r.roomNumber}</div>
+                <div class="room-type">${r.roomType}</div>
+                <div class="room-pet-type">${r.petType}</div>
+                <div class="room-desc">${r.description || ''}</div>
+                <div class="room-price">₱${r.pricePerNight.toFixed(2)}/night</div>
+            `;
+            card.addEventListener('click', () => selectRoom(card, r));
+            list.appendChild(card);
+        });
+    }
+    document.getElementById('roomsSection').style.display = 'block';
+    updatePrice();
+});
+
+function selectRoom(card, room) {
+    document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedRoom = room;
+    document.getElementById('selectedRoomId').value = room.id;
+    updatePrice();
+}
+
+function updatePrice() {
+    const checkIn = new Date(document.getElementById('checkIn').value);
+    const checkOut = new Date(document.getElementById('checkOut').value);
+    const nights = Math.max(0, (checkOut - checkIn) / 86400000);
+    const rate = selectedRoom ? selectedRoom.pricePerNight : 0;
+    let servicesSum = 0;
+    document.querySelectorAll('input[name="selectedServiceIds"]:checked').forEach(cb => {
+        const price = parseFloat(
+            cb.closest('.service-card')
+              .querySelector('.service-price')
+              .textContent.replace('₱','').replace(',','')
+        );
+        servicesSum += price;
+    });
+    const roomTotal = nights * rate;
+    const grand = roomTotal + servicesSum;
+    document.getElementById('nightCount').textContent = nights;
+    document.getElementById('roomRate').textContent = rate.toFixed(2);
+    document.getElementById('roomTotal').textContent = roomTotal.toFixed(2);
+    document.getElementById('servicesTotal').textContent = servicesSum.toFixed(2);
+    document.getElementById('grandTotal').textContent = grand.toFixed(2);
+    document.getElementById('priceSummary').style.display = 'block';
+}
+
+document.querySelectorAll('input[name="selectedServiceIds"]').forEach(cb => {
+    cb.addEventListener('change', updatePrice);
+});
+document.getElementById('checkIn').addEventListener('change', updatePrice);
+document.getElementById('checkOut').addEventListener('change', updatePrice);
+</script>
+}

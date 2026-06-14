@@ -1,0 +1,53 @@
+@model List<Owner>
+@{ ViewData["Title"] = "Pet Owners"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">
+            Pet Owners 
+            <img src="~/images/Owner.png" alt="Owner Icon" style="width: 120px; height: auto; vertical-align: text-bottom; margin-left: 5px; mix-blend-mode: multiply;" />
+        </h1>
+        <p class="page-subtitle">All registered pet owners in our system.</p>
+    </div>
+    <a asp-action="Register" class="btn-primary">+ Register Owner</a>
+</div>
+
+<div class="table-card">
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-icon"></div>
+            <p>No owners yet. <a asp-action="Register">Register the first one!</a></p>
+        </div>
+    }
+    else
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Registered</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var o in Model)
+                {
+                    <tr>
+                        <td class="id-cell">#@o.Id</td>
+                        <td><strong>@o.FullName</strong></td>
+                        <td>@o.Email</td>
+                        <td>@o.Phone</td>
+                        <td>@o.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            <a asp-action="OwnerDetails" asp-route-id="@o.Id" class="btn-xs btn-blue">View Pets</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,51 @@
+@model Owner
+@{ ViewData["Title"] = Model.FullName; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">@Model.FullName</h1>
+        <p class="page-subtitle">Owner profile and registered pets.</p>
+    </div>
+    <a asp-action="Owners" class="btn-secondary">← Back to Owners</a>
+</div>
+
+<div class="detail-grid">
+    <div class="detail-card">
+        <h3>Contact Information</h3>
+        <div class="detail-row"><span>Email</span><span>@Model.Email</span></div>
+        <div class="detail-row"><span>Phone</span><span>@Model.Phone</span></div>
+        <div class="detail-row"><span>Address</span><span>@(Model.Address ?? "—")</span></div>
+        <div class="detail-row"><span>Member Since</span><span>@Model.CreatedAt.ToString("MMMM dd, yyyy")</span></div>
+    </div>
+</div>
+
+<div class="section-header">
+    <h2 class="section-title">Pets (@Model.Pets.Count)</h2>
+</div>
+
+<div class="pets-grid">
+    @foreach (var p in Model.Pets)
+    {
+        <div class="pet-card">
+            <div class="pet-emoji">
+                @(p.Species switch {
+                    "Dog" => "🐕",
+                    "Cat" => "🐈",
+                    "Bird" => "🐦",
+                    "Rabbit" => "🐇",
+                    _ => "🐾"
+                })
+            </div>
+            <div class="pet-name">@p.Name</div>
+            <div class="pet-meta">@p.Species · @(p.Breed ?? "Mixed")</div>
+            @if (p.Age.HasValue)
+            {
+                <div class="pet-meta">Age: @p.Age yrs</div>
+            }
+            @if (!string.IsNullOrEmpty(p.SpecialNotes))
+            {
+                <div class="pet-notes">@p.SpecialNotes</div>
+            }
+        </div>
+    }
+</div>

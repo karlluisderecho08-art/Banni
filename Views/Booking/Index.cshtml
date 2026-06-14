@@ -1,0 +1,125 @@
+@model List<Booking>
+@{ ViewData["Title"] = "Bookings"; }
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">All Bookings</h1>
+        <p class="page-subtitle">Manage all hotel reservations.</p>
+    </div>
+    <a asp-action="Create" class="btn-primary">+ New Booking</a>
+</div>
+
+<div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="Search by pet, owner, or room..." class="search-input" />
+    <select id="statusFilter" class="filter-select">
+        <option value="">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Checked-In">Checked-In</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+    </select>
+</div>
+
+<div class="table-card">
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-icon"></div>
+            <p>No bookings yet. <a asp-action="Create">Create the first one!</a></p>
+        </div>
+    }
+    else
+    {
+        <table class="data-table" id="bookingsTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Pet</th>
+                    <th>Owner</th>
+                    <th>Room</th>
+                    <th>Type</th>
+                    <th>Check-In</th>
+                    <th>Check-Out</th>
+                    <th>Nights</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model)
+                {
+                    <tr data-status="@b.Status">
+                        <td class="id-cell">#@b.Id</td>
+                        <td><strong>@b.PetName</strong></td>
+                        <td>@b.OwnerName</td>
+                        <td>@b.RoomNumber</td>
+                        <td>@b.RoomType</td>
+                        <td>@b.CheckInDate.ToString("MMM dd, yyyy")</td>
+                        <td>@b.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                        <td class="center">@b.Nights</td>
+                        <td><span class="badge badge-@b.Status.ToLower().Replace("-","")">@b.Status</span></td>
+                        <td class="price-cell">₱@b.TotalPrice.ToString("N2")</td>
+                        <td>
+                            <div class="action-buttons">
+                                @if (b.Status == "Pending")
+                                {
+                                    <form asp-action="UpdateStatus" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <input type="hidden" name="status" value="Confirmed" />
+                                        <button class="btn-xs btn-green">Confirm</button>
+                                    </form>
+                                }
+                                @if (b.Status == "Confirmed")
+                                {
+                                    <form asp-action="UpdateStatus" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <input type="hidden" name="status" value="Checked-In" />
+                                        <button class="btn-xs btn-blue">Check-In</button>
+                                    </form>
+                                }
+                                @if (b.Status == "Checked-In")
+                                {
+                                    <form asp-action="UpdateStatus" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <input type="hidden" name="status" value="Completed" />
+                                        <button class="btn-xs btn-amber">Check-Out</button>
+                                    </form>
+                                }
+                                @if (b.Status != "Cancelled" && b.Status != "Completed")
+                                {
+                                    <form asp-action="UpdateStatus" method="post" style="display:inline">
+                                        <input type="hidden" name="id" value="@b.Id" />
+                                        <input type="hidden" name="status" value="Cancelled" />
+                                        <button class="btn-xs btn-red"
+                                                onclick="return confirm('Cancel this booking?')">Cancel</button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@section Scripts {
+<script>
+document.getElementById('searchInput').addEventListener('input', filterTable);
+document.getElementById('statusFilter').addEventListener('change', filterTable);
+
+function filterTable() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    document.querySelectorAll('#bookingsTable tbody tr').forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const rowStatus = row.dataset.status;
+        const matchText = text.includes(search);
+        const matchStatus = !status || rowStatus === status;
+        row.style.display = matchText && matchStatus ? '' : 'none';
+    });
+}
+</script>
+}
